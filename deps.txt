@@ -1,0 +1,1 @@
+bun expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-web react-dom expo-secure-store expo-network expo-localization expo-font react-native-webview expo-video
