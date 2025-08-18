@@ -36,44 +36,27 @@ export default function Page() {
     
     return (
         <>
-            <StatusBar style={'dark'} />
+            <StatusBar style={'auto'} />
 
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <Image
-                        source={require('@/public/images/Logo.png')}
-                        alt={'Burger'}
-                        resizeMode={'center'}
-                        style={styles.logo}
-                    />
-                    <View style={styles.search}>
-                        <Search size={20} color={colors.gray} />
-
-                        <TextInput 
-                            autoCapitalize={'none'}
-                            autoComplete={'off'}
-                            spellCheck={false}
-                            autoCorrect={false}
-                            value={search}
-                            onChangeText={setSearch}
-                            placeholder={'Buscar'}
-                            style={styles.searchInput}
+                    <View style={styles.logo}>
+                        <Image
+                            source={{
+                                uri: 'https://ui-avatars.com/api/?name=Luca'
+                            }}
+                            alt={'Luca'}
+                            resizeMode={'center'}
+                            style={styles.symbol}
                         />
                     </View>
                 </View>
                 
                 <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} />}>
                     {filteredCombos.map(({ link, name }, i) => (
-                        <Image
-                            key={i}
-                            source={{
-                                uri: link,
-                            }}
-                            alt={name}
-                            resizeMode={'contain'}
-                            resizeMethod={'scale'}
-                            style={styles.combo}
-                        />
+                        <View key={i} style={styles.balanceCard}>
+                            
+                        </View>
                     ))}
                 </ScrollView>
             </SafeAreaView>
@@ -97,32 +80,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         width: '100%',
-        height: '10%',
+        height: '8%',
+        backgroundColor: 'red',
         justifyContent: 'space-between',
     },
     logo: {
         width: 50,
-        aspectRatio: 1,
+        height: 50,
         marginLeft: '6%',
         marginRight: 'auto',
     },
-    search: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignContent: 'center',
-        gap: 15,
-        marginRight: '5%',
-        width: '70%',
-        borderRadius: 9999,
-        padding: 15,
-        height: '65%',
-        backgroundColor: colors.search,
+    symbol: {
+        width: 50,
+        height: 50,
     },
-    searchInput: {
-        width: '80%',
-    },
-    combo: {
+    balanceCard: {
         aspectRatio: 1.5 / 1,
         transform: [
             {
