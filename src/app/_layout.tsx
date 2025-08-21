@@ -13,11 +13,11 @@ export default function Layout() {
     }
 
     return (
-        <Tabs screenOptions={{
+        <Tabs initialRouteName={'index'} screenOptions={{
             headerShown: false,
             tabBarStyle: {
                 display: 'flex',
-                height: '11%',
+                height: '10%',
             },
             tabBarItemStyle: {
                 marginTop: '2%',

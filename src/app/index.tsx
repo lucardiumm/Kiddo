@@ -9,23 +9,16 @@ import { config } from '$/constants/config'
 import { colors } from '$/constants/colors'
 import { combos } from '$/constants/combos'
 import { Search } from 'lucide-react-native'
-import * as Notifications from 'expo-notifications'
-
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldPlaySound: true,
-        shouldSetBadge: true,
-        shouldShowBanner: true,
-        shouldShowList: true,
-    }),
-})
 
 export default function Page() {
     const [refreshing, setRefreshing] = useState(false)
     const [search, setSearch] = useState('')
-    
-    const filteredCombos = combos.filter(({ name }) => name.toLowerCase().replace(' ', '').includes(search.toLowerCase().replace(' ', '')))
+    const [name, setName] = useState('Luca')
+    const [result, setResult] = useState('')
 
+    const messages = [{ role: 'user', content: 'Hello!' }];
+    const params = { n_predict: 100, temperature: 0.7 };
+    
     const refresh = () => {
         setRefreshing(true)
 
@@ -36,28 +29,20 @@ export default function Page() {
     
     return (
         <>
-            <StatusBar style={'auto'} />
+            <StatusBar backgroundColor={colors.orange} translucent={true} style={'auto'} />
 
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.logo}>
-                        <Image
-                            source={{
-                                uri: 'https://ui-avatars.com/api/?name=Luca'
-                            }}
-                            alt={'Luca'}
-                            resizeMode={'center'}
-                            style={styles.symbol}
-                        />
-                    </View>
-                </View>
+                
                 
                 <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} />}>
-                    {filteredCombos.map(({ link, name }, i) => (
-                        <View key={i} style={styles.balanceCard}>
-                            
-                        </View>
-                    ))}
+                    <TextInput 
+                        placeholder={'Dime...'}
+                        placeholderTextColor={colors.gray}
+                        value={search}
+                        onChangeText={setSearch}
+                    />
+
+                    <Text>{result}</Text>
                 </ScrollView>
             </SafeAreaView>
         </>
@@ -80,9 +65,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         width: '100%',
-        height: '8%',
-        backgroundColor: 'red',
+        backgroundColor: 'transparent',
         justifyContent: 'space-between',
+    },
+    headerText: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        marginTop: '4%',
+        marginLeft: '6%',
+        color: colors.black,
     },
     logo: {
         width: 50,
@@ -98,9 +89,11 @@ const styles = StyleSheet.create({
         aspectRatio: 1.5 / 1,
         transform: [
             {
-                scale: 0.75,
+                scale: 0.90,
             }
         ],
         width: (Dimensions.get('window').width),
+        backgroundColor: colors.gray + '20',
+        borderRadius: 8,
     }
 })
